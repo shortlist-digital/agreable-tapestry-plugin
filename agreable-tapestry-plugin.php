@@ -2,7 +2,7 @@
 <?php
 /**
 * @wordpress-plugin
-* Plugin Name: agreable-tapestry-plugin
+* Plugin Name: Agreable Tapestry Plugin
 * Plugin URI: http://github.com/shortlist-digital/agreable-tapestry-plugin
 * Description: WordPress plugin to enable Tapesty - a React frontend for WordPress
 * Version: 1.0.0
