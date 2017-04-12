@@ -9,5 +9,7 @@
             "email": "hi@shortlist.studio"
         }
     ],
-    "require": {}
+    "require": {
+        "upstatement/routes": "^0.4.0"
+    }
 }

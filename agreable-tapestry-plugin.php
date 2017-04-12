@@ -10,11 +10,23 @@
 * Author URI: http://shortlist.studio
 * License: MIT
 */
+
+require __DIR__ . '/vendor/autoload.php';
+
 class AgreableTapestryPlugin
 {
 		public function __construct()
 		{
-			add_action('wp', [$this, 'on_wp_action']);
+			Routes::map('tapestry-api/[*:permalink]', function($params) {
+				$permalink = get_home_url()."/".$params['permalink'];
+				$post_id = url_to_postid($permalink);
+				$post = get_post($post_id);
+				$response = wp_remote_get(get_home_url()."/wp-json/wp/v2/" . $post->post_type  . "s/" . $post->ID . "?_embed");
+				header('Content-Type: application/json');
+				$body = $response['body'];
+				echo $body;
+				die;
+			});
 		}
 
 		public function on_wp_action()
