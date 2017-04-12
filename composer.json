@@ -1,5 +1,5 @@
 {
-    "name": "shortlist-digital/agreable-tapestry-plugin",
+    "name": "shortlist-digital/wp-tapestry-plugin",
     "description": "WordPress plugin to enable Tapesty - a React frontend for WordPress",
     "type": "wordpress-plugin",
     "license": "MIT",
@@ -8,8 +8,5 @@
             "name": "Shortlist Studio",
             "email": "hi@shortlist.studio"
         }
-    ],
-    "require": {
-        "upstatement/routes": "^0.4.0"
-    }
+    ]
 }
