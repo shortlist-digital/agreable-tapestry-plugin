@@ -2,8 +2,8 @@
 <?php
 /**
 * @wordpress-plugin
-* Plugin Name: Agreable Tapestry Plugin
-* Plugin URI: http://github.com/shortlist-digital/agreable-tapestry-plugin
+* Plugin Name: WP Tapestry Plugin
+* Plugin URI: http://github.com/shortlist-digital/wp-tapestry-plugin
 * Description: WordPress plugin to enable Tapesty - a React frontend for WordPress
 * Version: 1.0.0
 * Author: Shortlist Studio
@@ -17,23 +17,14 @@ class AgreableTapestryPlugin
 {
 		public function __construct()
 		{
-			Routes::map('tapestry-api/[*:permalink]', function($params) {
-				$permalink = get_home_url()."/".$params['permalink'];
-				$post_id = url_to_postid($permalink);
-				$post = get_post($post_id);
-				$response = wp_remote_get(get_home_url()."/wp-json/wp/v2/" . $post->post_type  . "s/" . $post->ID . "?_embed");
-				header('Content-Type: application/json');
-				$body = $response['body'];
-				echo $body;
-				die;
-			});
+			add_action('wp', [$this, 'on_wp_action']);
 		}
 
 		public function on_wp_action()
 		{
 			global $post;
 
-			if (!$post || !isset($post->post_status) || $post->post_status === 'publish') {
+			if (!$post) {
 				return; // At the moment we are only interested in non-published posts
 			}
 
@@ -60,6 +51,7 @@ class AgreableTapestryPlugin
 
 			echo "<script>window.tapestryPost = " . json_encode($response->data) . "</script>";
 
+
 			$this->boot_tapestry();
 
 			wp_footer();
@@ -72,6 +64,7 @@ class AgreableTapestryPlugin
 		public function boot_tapestry()
 		{
 			echo "Tapestry loading&hellip;";
+			echo "<script src='http://shortlist.studio/assets/example/preview.js'></script>";
 
 			//TODO Boot up the Tapestry client
 		}
